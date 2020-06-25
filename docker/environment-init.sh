@@ -30,7 +30,7 @@ echo '    "dns": ["10.1.2.3", "8.8.8.8"]' >> /etc/docker/daemon.json
 echo '}' >> /etc/docker/daemon.json
 
 # Configure DNS
-sed -ri -e "s!#DNS=!DNS=127.0.0.1!g" /etc/systemd/resolved.conf
+sed -ri -e "s?#DNS=?DNS=127.0.0.1?g" /etc/systemd/resolved.conf
 
 # Create Root CA
 openssl genrsa -out /home/vagrant/docker/rootCA.key 2048
