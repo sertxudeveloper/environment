@@ -5,6 +5,7 @@ sudo apt-get update
 sudo apt-get install -y apache2
 sudo a2enmod proxy proxy_http rewrite ssl
 sudo apt-get install -y bind9
+sudo chown bind:bind /var/cache/bind
 
 # Download latest Docker
 sudo apt install apt-transport-https ca-certificates curl software-properties-common
