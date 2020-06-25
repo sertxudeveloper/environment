@@ -24,6 +24,7 @@ sudo su -s $USER
 docker network create -d bridge --subnet=172.18.0.0/16 docker-net
 
 # Add own DNS to Docker
+sudo su -
 echo '{' >> /etc/docker/daemon.json
 echo '    "dns": ["10.1.2.3", "8.8.8.8"]' >> /etc/docker/daemon.json
 echo '}' >> /etc/docker/daemon.json
