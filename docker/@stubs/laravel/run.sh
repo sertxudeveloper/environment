@@ -1,6 +1,6 @@
 docker run -v /home/vagrant/docker/{{PROJECT_NAME}}/src:/var/www/html \
 --name {{PROJECT_NAME}} \
--d --net docker-net --ip {{PROJECT_IP}} -dit --dns 10.0.0.30 \
+-d --net docker-net --ip {{PROJECT_IP}} -dit --dns 172.18.0.1 \
 --restart unless-stopped --privileged laravel:1.0
 
 docker cp /home/vagrant/docker/{{PROJECT_NAME}}/apache_local.pem {{PROJECT_NAME}}:/etc/ssl/certs/apache_local.pem
