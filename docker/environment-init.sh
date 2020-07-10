@@ -33,6 +33,11 @@ echo '}' >> /etc/docker/daemon.json
 # Configure DNS
 sed -ri -e "s?#DNS=?DNS=127.0.0.1?g" /etc/systemd/resolved.conf
 
+# Configure Ubuntu DNS
+echo "nameserver 10.0.0.30" >> /etc/resolvconf/resolv.conf.d/head
+echo "nameserver 8.8.8.8" >> /etc/resolvconf/resolv.conf.d/head
+sudo systemctl restart resolvconf.service
+
 # Create Root CA
 openssl genrsa -out /home/vagrant/docker/rootCA.key 2048
 openssl req -x509 -new -nodes -key /home/vagrant/docker/rootCA.key -days 1024 -subj "/C=ES/ST=Valencia/L=Spain/O=Sertxu Developer/OU=Local Development/CN=Sertxu Developer" -out /home/vagrant/docker/rootCA.pem
