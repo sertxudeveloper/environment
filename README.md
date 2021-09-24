@@ -184,6 +184,7 @@ $ sudo update-ca-certificates --fresh
 ```
 $ docker cp /vagrant/rootCA.pem {container name}:/usr/local/share/ca-certificates
 $ docker exec {container name} rm -f /usr/local/share/ca-certificates/certificate.crt
+$ docker exec {container name} ln -s /usr/local/share/ca-certificates/rootCA.pem /etc/ssl/certs/
 $ docker exec {container name} update-ca-certificates --fresh
 ```
 
