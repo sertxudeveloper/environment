@@ -170,10 +170,21 @@ $ sudo systemctl restart nginx
 
 ## Trust SSL root CA
 
-We need to add the root CA certificate to the local trusted entities, in Ubuntu we need to follow the next steps.
+We need to add the root CA certificate to the local trusted entities.
+
+### Ubuntu guest
 
 ```
 $ sudo cp /vagrant/rootCA.crt /usr/local/share/ca-certificates/
 $ sudo update-ca-certificates --fresh
 ```
+
+### Docker container
+
+```
+$ docker cp /vagrant/rootCA.pem {container name}:/usr/local/share/ca-certificates
+$ docker exec {container name} rm -f /usr/local/share/ca-certificates/certificate.crt
+$ docker exec {container name} update-ca-certificates --fresh
+```
+
 
