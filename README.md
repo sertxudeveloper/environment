@@ -168,3 +168,12 @@ $ sudo ln -s /etc/nginx/sites-available/sertxudeveloper.local /etc/nginx/sites-e
 $ sudo systemctl restart nginx
 ```
 
+## Trust SSL root CA
+
+We need to add the root CA certificate to the local trusted entities, in Ubuntu we need to follow the next steps.
+
+```
+$ sudo cp /vagrant/rootCA.crt /usr/local/share/ca-certificates/
+$ sudo update-ca-certificates --fresh
+```
+
