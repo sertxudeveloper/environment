@@ -48,6 +48,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", inline: "sudo systemctl restart bind9", run: "always"
   config.vm.provision "shell", inline: "sudo systemctl restart nginx", run: "always"
+  config.vm.provision "shell", inline: "sudo systemctl restart docker.service", run: "always"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
