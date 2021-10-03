@@ -37,7 +37,7 @@ $ docker build -t laravel:1.0 laravel
 ## Create new project
 
 To create a new project, first we should create the required folders inside the `home` environment folder.<br>
-As an example we're going to create a Laravel project with the `sertxudeveloper.local` domain.
+As an example we're going to create a Laravel project with the `sertxudeveloper.test` domain.
 
 The contents will have the following structure.
 
@@ -46,14 +46,14 @@ The contents will have the following structure.
 - init.sh
 - home/
   - @images
-  - sertxudeloper.local
+  - sertxudeloper.test
     - run.sh
     - data
 
 Next we sould link the project folder located at the `home` environment folder with the system `home` folder.
 
 ```
-$ sudo ln -s /vagrant/home/sertxudeveloper.local /home/sertxudeveloper.local
+$ sudo ln -s /vagrant/home/sertxudeveloper.test /home/sertxudeveloper.test
 ```
 
 ### Configure domain
@@ -61,36 +61,33 @@ $ sudo ln -s /vagrant/home/sertxudeveloper.local /home/sertxudeveloper.local
 Our environment has its own DNS server, we should create the DNS zone for the new domain.
 
 ```
-$ sudo vi /etc/bind/named.conf.local
+$ sudo vi /etc/bind/named.conf.test
 ```
 
 ```
 ...
-zone "sertxudeveloper.local" {
+zone "sertxudeveloper.test" {
     type master;
-    file "/etc/bind/db.sertxudeveloper.local";
+    file "/etc/bind/db.sertxudeveloper.test";
 };
 ```
 
 -----
 
 ```
-$ sudo vi /etc/bind/db.sertxudeveloper.local
+$ sudo vi /etc/bind/db.sertxudeveloper.test
 ```
 
 ```
 $TTL 1d
-$ORIGIN sertxudeveloper.local.
+$ORIGIN sertxudeveloper.test.
 
-@ IN SOA sertxudeveloper.local. admin.sertxudeveloper.local. (
+@ IN SOA sertxudeveloper.test. admin.sertxudeveloper.test. (
 20200714 8h 15m 4w 1d)
 
-www IN CNAME sertxudeveloper.local.
-player IN CNAME sertxudeveloper.local.
-accounts IN CNAME sertxudeveloper.local.
-store IN CNAME sertxudeveloper.local.
+* IN CNAME sertxudeveloper.test.
 
-@ IN NS sertxudeveloper.local.
+@ IN NS sertxudeveloper.test.
 @ IN A 10.0.0.30
 ```
 
@@ -120,31 +117,31 @@ It will ask for the domain we want to generate the certificate, and will create 
 To be able to access our project we need to configure a reverse proxy.
 
 ```
-$ sudo vi /etc/nginx/sites-available/sertxudeveloper.local
+$ sudo vi /etc/nginx/sites-available/sertxudeveloper.test
 ```
 
 ```nginx
 server {
     listen 80;
-    server_name sertxudeveloper.local;
-    server_name www.sertxudeveloper.local;
+    server_name sertxudeveloper.test;
+    server_name www.sertxudeveloper.test;
 
-    return 301 https://www.sertxudeveloper.local$request_uri;
+    return 301 https://www.sertxudeveloper.test$request_uri;
 }
 
 server {
     listen 443 ssl;
-    server_name sertxudeveloper.local;
+    server_name sertxudeveloper.test;
 
-    return 301 https://www.sertxudeveloper.local$request_uri;
+    return 301 https://www.sertxudeveloper.test$request_uri;
 }
 
 server {
     listen 443 ssl;
-    server_name www.sertxudeveloper.local;
+    server_name www.sertxudeveloper.test;
 
-    ssl_certificate /home/sertxudeveloper.local/sertxudeveloper.pem;
-    ssl_certificate_key /home/sertxudeveloper.local/sertxudeveloper.key;
+    ssl_certificate /home/sertxudeveloper.test/sertxudeveloper.pem;
+    ssl_certificate_key /home/sertxudeveloper.test/sertxudeveloper.key;
 
     location / {
         proxy_pass http://172.18.1.2;
@@ -161,7 +158,7 @@ server {
 Once we saved the reverse proxy configuration, we need to enable the site.
 
 ```
-$ sudo ln -s /etc/nginx/sites-available/sertxudeveloper.local /etc/nginx/sites-enabled/sertxudeveloper.local
+$ sudo ln -s /etc/nginx/sites-available/sertxudeveloper.test /etc/nginx/sites-enabled/sertxudeveloper.test
 ```
 
 ```
