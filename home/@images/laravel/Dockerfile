@@ -15,7 +15,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN apt-get install -my wget gnupg
 
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_current.x | bash -
 RUN apt-get install -y nodejs
 
 RUN npm install -g npm@latest
