@@ -22,4 +22,8 @@ RUN npm install -g npm@latest
 
 RUN a2enmod headers
 
+COPY /home/vagrant/docker/rootCA.pem /usr/local/share/ca-certificates/rootCA.crt
+RUN rm -f /usr/local/share/ca-certificates/certificate.crt
+RUN update-ca-certificates --fresh
+
 EXPOSE 80
