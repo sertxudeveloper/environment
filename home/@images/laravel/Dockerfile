@@ -22,8 +22,14 @@ RUN npm install -g npm@latest
 
 RUN a2enmod headers
 
-COPY /home/vagrant/docker/rootCA.pem /usr/local/share/ca-certificates/rootCA.crt
+COPY rootCA.pem /usr/local/share/ca-certificates/rootCA.crt
 RUN rm -f /usr/local/share/ca-certificates/certificate.crt
 RUN update-ca-certificates --fresh
 
-EXPOSE 80
+RUN apt-get install -y supervisor
+
+#ENTRYPOINT ["/bin/bash"]
+
+#CMD ["/etc/init.d/supervisor start"]
+#CMD ["service apache2 start"]
+
