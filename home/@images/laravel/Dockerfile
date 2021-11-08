@@ -28,8 +28,4 @@ RUN update-ca-certificates --fresh
 
 RUN apt-get install -y supervisor
 
-#ENTRYPOINT ["/bin/bash"]
-
-#CMD ["/etc/init.d/supervisor start"]
-#CMD ["service apache2 start"]
-
+CMD service supervisor status || service supervisor start && apache2-foreground
