@@ -26,6 +26,7 @@ COPY rootCA.pem /usr/local/share/ca-certificates/rootCA.crt
 RUN rm -f /usr/local/share/ca-certificates/certificate.crt
 RUN update-ca-certificates --fresh
 
-RUN apt-get install -y supervisor
+RUN apt-get install -y supervisor cron
 
-CMD service supervisor status || service supervisor start && apache2-foreground
+CMD service supervisor status || service supervisor start && service cron start && apache2-foreground
+
