@@ -28,5 +28,15 @@ RUN update-ca-certificates --fresh
 
 RUN apt-get install -y supervisor cron
 
-CMD service supervisor status || service supervisor start && service cron start && apache2-foreground
+# Copy crontab file to cron.d
+ADD crontab /etc/cron.d/cron
 
+RUN chmod 0644 /etc/cron.d/cron
+
+# Apply cron job
+RUN crontab /etc/cron.d/cron
+
+# Copy supervisor config file
+ADD laravel-worker.conf /etc/supervisor/conf.d/laravel-worker.conf
+
+CMD service supervisor status || service supervisor start && service cron start && apache2-foreground
