@@ -6,6 +6,7 @@ RUN sed -ri -e "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-av
 
 RUN a2enmod rewrite
 RUN a2enmod ssl
+RUN a2enmod headers
 
 RUN apt-get update
 RUN apt-get install -y zlib1g-dev unzip libzip-dev
@@ -19,8 +20,6 @@ RUN curl -sL https://deb.nodesource.com/setup_current.x | bash -
 RUN apt-get install -y nodejs
 
 RUN npm install -g npm@latest
-
-RUN a2enmod headers
 
 COPY rootCA.pem /usr/local/share/ca-certificates/rootCA.crt
 RUN rm -f /usr/local/share/ca-certificates/certificate.crt
