@@ -140,8 +140,8 @@ server {
     listen 443 ssl;
     server_name www.sertxudeveloper.test;
 
-    ssl_certificate /home/sertxudeveloper.test/sertxudeveloper.pem;
-    ssl_certificate_key /home/sertxudeveloper.test/sertxudeveloper.key;
+    ssl_certificate /home/sertxudeveloper.test/nginx.pem;
+    ssl_certificate_key /home/sertxudeveloper.test/nginx.key;
 
     location / {
         proxy_pass http://172.18.1.2;
