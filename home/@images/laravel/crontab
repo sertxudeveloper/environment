@@ -1,1 +1,2 @@
 * * * * * cd /var/www/html && /usr/local/bin/php artisan schedule:run --no-ansi > /var/www/html/storage/logs/cron.log 2>&1
+
