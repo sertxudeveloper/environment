@@ -12,6 +12,8 @@ RUN apt-get update
 RUN apt-get install -y zlib1g-dev unzip libzip-dev
 RUN docker-php-ext-install zip pdo pdo_mysql
 
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN apt-get install -my wget gnupg
