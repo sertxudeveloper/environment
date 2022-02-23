@@ -23,6 +23,8 @@ RUN apt-get install -y nodejs
 
 RUN npm install -g npm@latest
 
+RUN pecl install pcov && docker-php-ext-enable pcov
+
 COPY rootCA.pem /usr/local/share/ca-certificates/rootCA.crt
 RUN rm -f /usr/local/share/ca-certificates/certificate.crt
 RUN update-ca-certificates --fresh
