@@ -190,7 +190,7 @@ $ docker exec {container name} update-ca-certificates --fresh
 ```
 mkdir data
 chown -R root:www-data data
-chmod 2770 data
+chmod -R 2770 data
 find data -type d -exec chmod 770 {} \;
 find data -type f -exec chmod 660 {} \;
 ```
