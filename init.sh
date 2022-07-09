@@ -12,7 +12,7 @@ apt install -y docker-ce docker-ce-cli containerd.io
 groupadd docker
 usermod -aG docker $USER
 
-chown "$USER":"$USER" /home/"$USER"/.docker -R
+chown "$USER":"$USER" "$HOME/.docker" -R
 chmod g+rwx "$HOME/.docker" -R
 
 docker network create -d bridge --subnet 172.18.0.0/16 docker-net
