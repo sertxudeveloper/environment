@@ -42,4 +42,7 @@ RUN crontab /etc/cron.d/cron
 # Copy supervisor config file
 ADD laravel-worker.conf /etc/supervisor/conf.d/laravel-worker.conf
 
+# Specify stop signal
+STOPSIGNAL SIGQUIT
+
 CMD service supervisor status || service supervisor start && service cron start && apache2-foreground
