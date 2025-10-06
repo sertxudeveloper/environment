@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> This repository has been deprecated.
+
+---
+
 # Dev Environment
 
 This environment is used as a server with virtualization using Docker.
